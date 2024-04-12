@@ -147,7 +147,8 @@ def moveSantas():
                     if (rudolfPoint[0] == minY and rudolfPoint[1] == minX):
                         break
 
-            if(1 <= minY <= n and 1<= minX <= n and not isSanta(minY, minX)):
+            if(1 <= minY <= n and 1<= minX <= n and not isSanta(minY, minX)
+            and getDistance(rudolfPoint[0], rudolfPoint[1], minY,minX) < getDistance(rudolfPoint[0], rudolfPoint[1], santaY[i],santaX[i])):
                 santaY[i] = minY
                 santaX[i] = minX
 
