@@ -144,17 +144,14 @@ def moveSantas():
                 dir = j
                 can_move = True
 
-                if (rudolfPoint[0] == minY and rudolfPoint[1] == minX):
-                    break
-
         if (can_move and minDis < getDistance(rudolfPoint[0],rudolfPoint[1], santaY[i], santaX[i])):
             santaY[i] = minY
             santaX[i] = minX
 
-        if (rudolfPoint[0] == santaY[i] and rudolfPoint[1] == santaX[i]):
-            santaScores[i] += d
-            sturnedSantas[i] = 2
-            crashRudolf(i, directions[getOppositeDirection(dir)])
+            if (rudolfPoint[0] == santaY[i] and rudolfPoint[1] == santaX[i]):
+                santaScores[i] += d
+                sturnedSantas[i] = 2
+                crashRudolf(i, directions[getOppositeDirection(dir)])
 
 
 for _ in range(m):
