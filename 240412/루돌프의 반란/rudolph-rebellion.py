@@ -28,7 +28,7 @@ def isSantasAllOut():
     return True
 
 def getDistance(y1,x1, y2,x2):
-    return (y1-y2)*(y1-y2) + (x1-x2)*(x1-x2)
+    return (y1-y2)**2 + (x1-x2)**2
 
 def getCloseSantaNum():
     closeSantaLst = []
@@ -113,7 +113,7 @@ def moveRudolf():
 
     if (minDis == 0):
         scoreSantas[closeSantaNum] += c
-        sturnedSantas[closeSantaNum] += 2
+        sturnedSantas[closeSantaNum] = 2
         crashSanta(closeSantaNum, dir)
 
 def isSanta(y,x):
@@ -154,7 +154,7 @@ def moveSantas():
 
             if(minDis==0):
                 scoreSantas[i] += d
-                sturnedSantas[i] += 2
+                sturnedSantas[i] = 2
                 crashRudolf(i, santaDir[getOppositeDirection(dir)])
 
 for _ in range(m):
@@ -173,15 +173,6 @@ for _ in range(m):
     for i in range(1,p+1):
         if(not outSantas[i]):
             scoreSantas[i] += 1
-
-    # print("---------")
-    # print("rudolf:", rudolfPoint)
-    # print("santa")
-    # for i in range(1,p+1):
-    #     print(santaY[i], santaX[i])
-    # print("outSanta", outSantas[1:p+1])
-    # print("score: ", scoreSantas[1:p+1])
-    # print("sturn: ", sturnedSantas[1:p+1])
 
 for i in range(1, p+1):
     print(scoreSantas[i], end=" ")
