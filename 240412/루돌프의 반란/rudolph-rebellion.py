@@ -48,27 +48,20 @@ def isInDifferentSanta(santaNum):
 
 
 def interactionSanta(santaNum, dir):
-    santaY[santaNum] += dir[0]
-    santaX[santaNum] += dir[1]
-
     if (santaY[santaNum] < 1 or santaY[santaNum] > n or santaX[santaNum] < 1 or santaX[santaNum] > n):
         outSantas[santaNum] = True
         return
     isInSantaNum = isInDifferentSanta(santaNum)
     if (isInSantaNum != -1):
+        santaY[isInSantaNum] += dir[0]
+        santaX[isInSantaNum] += dir[1]
         interactionSanta(isInSantaNum, dir)
 
 def crashSanta(closeSantaNum, dir):
     santaY[closeSantaNum] += dir[0]*c
     santaX[closeSantaNum] += dir[1]*c
 
-    if (santaY[closeSantaNum] < 1 or santaY[closeSantaNum] > n or santaX[closeSantaNum] < 1 or santaX[closeSantaNum] > n):
-        outSantas[closeSantaNum] = True
-        return
-
-    isInSantaNum = isInDifferentSanta(closeSantaNum)
-    if (isInSantaNum != -1):
-        interactionSanta(isInSantaNum, dir)
+    interactionSanta(closeSantaNum, dir)
 
 def getOppositeDirection(dirNum):
     if (dirNum == 0):
@@ -84,12 +77,8 @@ def crashRudolf(santaNum, dir):
     santaY[santaNum] += dir[0]*d
     santaX[santaNum] += dir[1]*d
 
-    if (santaY[santaNum] < 1 or santaY[santaNum] > n or santaX[santaNum] < 1 or santaX[santaNum] > n):
-        outSantas[santaNum] = True
-        return
-    isInSantaNum = isInDifferentSanta(santaNum)
-    if (isInSantaNum != -1):
-        interactionSanta(isInSantaNum, dir)
+    interactionSanta(santaNum, dir)
+
 def moveRudolf():
     closeSantaNum = getCloseSantaNum()
 
