@@ -19,6 +19,8 @@ for _ in range(p):
     santaY[idx] = sr
     santaX[idx] = sc
 
+def isInRange(y,x):
+    return 1 <= y <= n and 1<= x <= n
 
 def isSantasAllOut():
     for i in range(1, p + 1):
@@ -50,7 +52,7 @@ def isInDifferentSanta(santaNum):
 
 
 def interactionSanta(santaNum, dir):
-    if (santaY[santaNum] < 1 or santaY[santaNum] > n or santaX[santaNum] < 1 or santaX[santaNum] > n):
+    if not isInRange(santaY[santaNum], santaX[santaNum]):
         outSantas[santaNum] = True
         return
     isInSantaNum = isInDifferentSanta(santaNum)
@@ -97,7 +99,7 @@ def moveRudolf():
         tmpX = rudolfPoint[1] + directions[i][1]
         tmpDis = getDistance(tmpY, tmpX, santaY[closeSantaNum], santaX[closeSantaNum])
 
-        if (minDis >= tmpDis):
+        if (isInRange(tmpY, tmpX) and minDis >= tmpDis):
             minY = tmpY
             minX = tmpX
             minDis = tmpDis
@@ -135,7 +137,7 @@ def moveSantas():
             tmpX = santaX[i] + directions[j][1]
             tmpDis = getDistance(rudolfPoint[0], rudolfPoint[1], tmpY, tmpX)
 
-            if (isSanta(tmpY, tmpX) or tmpY < 1 or tmpY > n or tmpX < 1 or tmpX > n):
+            if (isSanta(tmpY, tmpX) or not isInRange(tmpY, tmpX)):
                 continue
             if (minDis >= tmpDis):
                 minY = tmpY
