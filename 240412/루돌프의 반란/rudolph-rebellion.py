@@ -152,7 +152,7 @@ def moveSantas():
                 santaY[i] = minY
                 santaX[i] = minX
 
-            if(minDis==0):
+            if(getDistance(rudolfPoint[0], rudolfPoint[1], santaY[i],santaX[i])==0):
                 scoreSantas[i] += d
                 sturnedSantas[i] = 2
                 crashRudolf(i, santaDir[getOppositeDirection(dir)])
