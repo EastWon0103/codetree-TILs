@@ -1,5 +1,4 @@
 # 좌상단 (1,1)
-
 n, m, k = map(int, input().split())
 maze = [[0 for _ in range(n+1)] for _ in range(n+1)]
 runners = [0 for _ in range(m)]
@@ -11,7 +10,6 @@ for i in range(1, n+1):
     tmp = [0]
     tmp.extend(list(map(int, input().split())))
     maze[i] = tmp
-
 
 for i in range(m):
     runners[i] = tuple(map(int, input().split()))
@@ -103,21 +101,6 @@ def rotate_90(point, length):
         for x in range(point[1], point[1] + length):
             maze[y][x] = minus_or_zero(tmp_maze[y][x])
 
-
-    # for y in range(point[0], point[0]+length):
-    #     for x in range(point[1], y):
-    #         tmp = minus_or_zero(maze[y][x])
-    #         maze[y][x] = minus_or_zero(maze[x][y])
-    #         maze[x][y] = tmp
-    #
-    # # reverse
-    # for y in range(point[0], point[0]+length):
-    #     for p in range(int(length/2)):
-    #         tmp = maze[y][point[1]+p]
-    #         maze[y][point[1]+p] = maze[y][point[1]+length-p-1]
-    #         maze[y][point[1]+length-p-1] = tmp
-
-
 def move_runners():
     move_sum = 0
     for i in range(m):
@@ -146,28 +129,9 @@ def move_runners():
 
     return move_sum
 
-# def printResult():
-#     for i in range(1,n+1):
-#         for j in range(1, n+1):
-#             print(maze[i][j], end=" ")
-#         print()
-#
-#     print("러너 위치")
-#     for runner in runners:
-#         print(runner)
-#     print("탈출한 러너", is_escape)
-#     print("탈출구", exitPoint)
-
 move_sum = 0
 for t in range(1, k+1):
-    # printResult()
-    # print(f"------{t}초 결과-------")
     move_sum += move_runners()
-    # print("움직이기 완료", move_sum)
-    # print("러너 위치")
-    # for runner in runners:
-    #     print(runner)
-    # print("탈출한 러너", is_escape)
 
     is_all_escape = True
     for i in range(m):
@@ -178,11 +142,9 @@ for t in range(1, k+1):
         break
 
     square_point, length = find_square()
-    # print("사각형 찾음", square_point, length)
     rotate_90(square_point, length)
     runners_rotate_90((square_point[0], square_point[1], length))
     exitPoint = get_rotate_90_point((square_point[0], square_point[1], length), exitPoint)
-    # print("모두 돌림")
 
 print(move_sum)
 print(*exitPoint)
