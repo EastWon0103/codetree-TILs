@@ -139,8 +139,8 @@ def razor_attack(attacker, target, t):
         if board[y][x] < 0:
             board[y][x] = 0
         hit_log[y][x] = t
-        y += directions[get_opposite_dir(dirNum)][0]
-        x += directions[get_opposite_dir(dirNum)][1]
+        y = setY(y + directions[get_opposite_dir(dirNum)][0])
+        x = setX(x + directions[get_opposite_dir(dirNum)][1])
         dirNum = visited[y][x][3]
 
     return True
@@ -177,7 +177,19 @@ def heal_turret(attacker, t):
             if board[i][j] != 0 and hit_log[i][j] < t and (i,j) != attacker[:2]:
                 board[i][j] += 1
 
+def can_keep_going():
+    num_of_turret = 0
+    for i in range(1,n+1):
+        for j in range(1,m+1):
+            if board[i][j] > 0:
+                num_of_turret += 1
+
+    return num_of_turret>1
+
 for t in range(1, k+1):
+    if not can_keep_going():
+        break
+
     attacker = find_attacker() # 약한 포탑이 공격자 y,x,공격력
     board[attacker[0]][attacker[1]] = attacker[2] # 싱크 맞추기
 
